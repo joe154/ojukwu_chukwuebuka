@@ -10,13 +10,14 @@ api.interceptors.request.use(async (config) => {
     const user = auth.currentUser;
     if (user) {
       const token = await user.getIdToken();
-      config.headers = {
-        ...(config.headers || {}),
-        Authorization: `Bearer ${token}`
-      };
+      if (!config.headers) {
+        // config.headers can be an AxiosHeaders instance; cast to any for assignment
+        config.headers = {} as any;
+      }
+      (config.headers as any).Authorization = `Bearer ${token}`;
     }
   } catch (err) {
-    // nothing
+    // ignore
   }
   return config;
 });
