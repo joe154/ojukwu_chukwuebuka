@@ -15,12 +15,12 @@ export default function About() {
   const { data: skills } = useSWR('/skills', fetcher);
   return (
     <section className="max-w-4xl mx-auto py-8">
-      <motion.h2 className="text-3xl" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-        About
-      </motion.h2>
-      <motion.p className="mt-4 prose" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
-        Brief bio goes here — highlight your focus, technology preferences, and what you build.
-      </motion.p>
+      <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
+        <h2 className="text-3xl">About</h2>
+      </motion.div>
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+        <p className="mt-4 prose">Brief bio goes here — highlight your focus, technology preferences, and what you build.</p>
+      </motion.div>
 
       <div className="mt-8">
         <h3 className="text-xl mb-3">Timeline</h3>
