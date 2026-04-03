@@ -8,6 +8,7 @@
 # Local environment files
 .env.local
 .env.*.local
+.env
 
 # Vercel / deployment
 .vercel/
