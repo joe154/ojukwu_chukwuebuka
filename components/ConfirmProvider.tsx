@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { MotionDiv } from "../lib/motion";
 
 type ConfirmOptions = {
   title?: string;
@@ -43,10 +44,10 @@ export function ConfirmProvider({ children }: { children: ReactNode }) {
     <ConfirmContext.Provider value={{ confirm }}>
       {children}
       <AnimatePresence>
-        {state.open && state.options && (
+          {state.open && state.options && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="fixed inset-0 bg-black/50" onClick={() => handleClose(false)} />
-            <motion.div
+            <MotionDiv
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
@@ -68,7 +69,7 @@ export function ConfirmProvider({ children }: { children: ReactNode }) {
                   {state.options.confirmText || "Confirm"}
                 </button>
               </div>
-            </motion.div>
+            </MotionDiv>
           </div>
         )}
       </AnimatePresence>

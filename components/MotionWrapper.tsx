@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { MotionDiv } from "../lib/motion";
 import { usePathname } from "next/navigation";
 
 export default function MotionWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   return (
     <AnimatePresence mode="wait">
-      <motion.div
+      <MotionDiv
         key={pathname}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -16,7 +17,7 @@ export default function MotionWrapper({ children }: { children: React.ReactNode 
         className="w-full"
       >
         {children}
-      </motion.div>
+      </MotionDiv>
     </AnimatePresence>
   );
 }

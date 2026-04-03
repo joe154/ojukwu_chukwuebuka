@@ -2,7 +2,8 @@
 import useSWR from "swr";
 import api from "../../lib/api";
 import ProjectCard from "../../components/ProjectCard";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { MotionH2, MotionDiv } from "../../lib/motion";
 import CategoryFilter from "../../components/CategoryFilter";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -47,9 +48,9 @@ export default function Projects() {
 
   return (
     <section>
-      <motion.h2 className="text-3xl" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <MotionH2 className="text-3xl" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         Projects
-      </motion.h2>
+      </MotionH2>
 
       <div className="mt-4">
         {!categories ? (
@@ -59,19 +60,19 @@ export default function Projects() {
         )}
       </div>
 
-      <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+      <MotionDiv className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
         {!data ? (
           [1, 2, 3].map((i) => <div key={i} className="h-48 bg-slate-700 rounded-lg animate-pulse" />)
         ) : (
           <AnimatePresence mode="popLayout">
             {filtered.map((p: any) => (
-              <motion.div key={p.id} layout initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}>
+              <MotionDiv key={p.id} layout initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}>
                 <ProjectCard project={p} />
-              </motion.div>
+              </MotionDiv>
             ))}
           </AnimatePresence>
         )}
-      </motion.div>
+      </MotionDiv>
     </section>
   );
 }

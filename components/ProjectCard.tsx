@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { MotionArticle } from "../lib/motion";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,7 +10,7 @@ type Props = {
 export default function ProjectCard({ project }: Props) {
   const src = project.cover_image || project.image || "/placeholder.jpg";
   return (
-    <motion.article
+    <MotionArticle
       whileHover={{ y: -6, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 300 }}
       className="bg-slate-800 rounded-lg p-4"
@@ -36,6 +36,6 @@ export default function ProjectCard({ project }: Props) {
       <Link href={`/projects/${project.slug || project.id}`} className="mt-3 inline-block text-indigo-400">
         Read more
       </Link>
-    </motion.article>
+    </MotionArticle>
   );
 }

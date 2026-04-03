@@ -1,6 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { MotionDiv } from "../lib/motion";
 
 type ToastItem = { id: string; message: string; type?: "success" | "error" | "info" };
 
@@ -40,7 +41,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           {toasts.map((t) => {
             const bg = t.type === "success" ? "bg-green-600" : t.type === "error" ? "bg-red-600" : "bg-black/80";
             return (
-              <motion.div
+              <MotionDiv
                 key={t.id}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -48,7 +49,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 className={`min-w-[200px] max-w-sm px-4 py-2 rounded shadow ${bg} text-white`}
               >
                 {t.message}
-              </motion.div>
+              </MotionDiv>
             );
           })}
         </AnimatePresence>

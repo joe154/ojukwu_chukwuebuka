@@ -1,7 +1,7 @@
 "use client";
 import { useForm } from "react-hook-form";
 import api from "../../lib/api";
-import { motion } from "framer-motion";
+import { MotionForm } from "../../lib/motion";
 import { useState } from "react";
 import { useToast } from '../../components/ToastProvider';
 
@@ -29,7 +29,7 @@ export default function Contact() {
   };
 
   return (
-    <motion.form onSubmit={handleSubmit(onSubmit)} className="max-w-xl" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <MotionForm onSubmit={handleSubmit(onSubmit)} className="max-w-xl" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <h2 className="text-2xl">Contact</h2>
       <input {...register('name')} placeholder="Name" className="block w-full my-2 p-2 bg-slate-900 rounded" />
       <input {...register('email', { required: true })} placeholder="Email" className="block w-full my-2 p-2 bg-slate-900 rounded" />
@@ -40,6 +40,6 @@ export default function Contact() {
         </button>
         {status && <div className="text-sm text-slate-300">{status}</div>}
       </div>
-    </motion.form>
+    </MotionForm>
   );
 }

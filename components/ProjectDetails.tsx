@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { MotionArticle } from "../lib/motion";
 import Image from "next/image";
 
 export default function ProjectDetails({ project }: { project: any }) {
   if (!project) return <div>Not found</div>;
   return (
-    <motion.article
+    <MotionArticle
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35 }}
@@ -31,6 +31,6 @@ export default function ProjectDetails({ project }: { project: any }) {
           <a href={project.live_link} target="_blank" rel="noreferrer" className="text-indigo-500">View live</a>
         </p>
       )}
-    </motion.article>
+    </MotionArticle>
   );
 }
