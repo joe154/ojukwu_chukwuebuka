@@ -9,6 +9,7 @@ import { ConfirmProvider } from '../ConfirmProvider';
 import { ToastProvider } from '../ToastProvider';
 
 
+export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (
     <AuthProvider>
       <ConfirmProvider>
