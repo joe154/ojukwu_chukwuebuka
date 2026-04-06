@@ -1,13 +1,13 @@
 "use client";
 
 import React from 'react';
-import Header from '../../Header';
-import Footer from '../../Footer';
-import MotionWrapper from '../../MotionWrapper';
-import { AuthProvider } from '../../AuthProvider';
-import { ConfirmProvider } from '../../ConfirmProvider';
-import { ToastProvider } from '../../ToastProvider';
-import { ErrorBoundary } from '../../ErrorBoundary';
+import Header from '../Header';
+import Footer from '../Footer';
+import MotionWrapper from '../MotionWrapper';
+import { AuthProvider } from '../AuthProvider';
+import { ConfirmProvider } from '../ConfirmProvider';
+import { ToastProvider } from '../ToastProvider';
+import { ErrorBoundary } from '../ErrorBoundary';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   return (

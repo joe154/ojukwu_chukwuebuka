@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import { auth } from '../../../lib/firebase';
+import { auth } from '../../lib/firebase';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
