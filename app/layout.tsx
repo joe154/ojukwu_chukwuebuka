@@ -1,11 +1,5 @@
 import "./globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { AuthProvider } from "../components/AuthProvider";
-import MotionWrapper from "../components/MotionWrapper";
-import { ConfirmProvider } from "../components/ConfirmProvider";
-import { ToastProvider } from "../components/ToastProvider";
-import { ErrorBoundary } from "../components/ErrorBoundary";
+import MainLayout from "../components/Layout/MainLayout";
 
 export const metadata = {
   title: "Ebuka - Full-Stack Developer & Designer",
@@ -27,21 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#020617" />
       </head>
       <body className="antialiased bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-        <ErrorBoundary>
-          <AuthProvider>
-            <ConfirmProvider>
-              <ToastProvider>
-                <div className="min-h-screen flex flex-col">
-                  <Header />
-                  <MotionWrapper>
-                    <main className="flex-1 container-max px-4 sm:px-6 lg:px-8 py-8 sm:py-12">{children}</main>
-                  </MotionWrapper>
-                  <Footer />
-                </div>
-              </ToastProvider>
-            </ConfirmProvider>
-          </AuthProvider>
-        </ErrorBoundary>
+        <MainLayout>{children}</MainLayout>
       </body>
     </html>
   );
