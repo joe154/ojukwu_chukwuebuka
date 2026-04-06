@@ -378,8 +378,6 @@ body {
     display: none;
   }
 }
-  }
-  
   h3 {
     @apply text-2xl font-bold mb-2;
   }
