@@ -60,7 +60,12 @@ export default function About() {
   const { data: skills, isLoading: skillsLoading } = useSWR("/skills", fetcher);
 
   return (
-    <motion.section className="pb-6" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
+    <motion.section
+      className="pb-6"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+    >
       {/* Hero Section */}
       <motion.div
         className="space-y-6 mb-16 sm:mb-20"
@@ -76,7 +81,10 @@ export default function About() {
             </span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold">
-            Full-Stack <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-cyan-400">Developer & Designer</span>
+            Full-Stack{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-cyan-400">
+              Developer & Designer
+            </span>
           </h1>
           <p className="text-lg text-slate-300 max-w-3xl leading-relaxed">
             I'm a passionate full-stack developer with 5+ years of experience building web applications. I specialize in creating scalable, high-performance solutions using modern technologies. My focus is on delivering exceptional user experiences while maintaining clean, maintainable code.
@@ -125,7 +133,10 @@ export default function About() {
           >
             <Briefcase className="w-5 h-5 text-primary-400" />
             <h2 className="text-3xl sm:text-4xl font-bold">
-              My <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-cyan-400">Journey</span>
+              My{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-cyan-400">
+                Journey
+              </span>
             </h2>
           </motion.div>
 
@@ -146,7 +157,9 @@ export default function About() {
                     <div className="flex items-center justify-center w-10 h-10 rounded-full border-2 border-primary-500 bg-slate-900">
                       <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary-500 to-cyan-400" />
                     </div>
-                    {index < timeline.length - 1 && <div className="w-0.5 h-20 md:h-32 bg-gradient-to-b from-primary-500 to-transparent mt-2" />}
+                    {index < timeline.length - 1 && (
+                      <div className="w-0.5 h-20 md:h-32 bg-gradient-to-b from-primary-500 to-transparent mt-2" />
+                    )}
                   </div>
                 </div>
 
@@ -185,7 +198,10 @@ export default function About() {
           >
             <Code2 className="w-5 h-5 text-primary-400" />
             <h2 className="text-3xl sm:text-4xl font-bold">
-              Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-cyan-400">Skills</span>
+              Technical{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-cyan-400">
+                Skills
+              </span>
             </h2>
           </motion.div>
 
@@ -206,12 +222,15 @@ export default function About() {
             >
               {skills.map((skill: any, index: number) => (
                 <motion.div
-                  key={skill.id}
+                  key={skill.id || index}
                   variants={itemVariants}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <Badge variant="primary" className="w-full text-center justify-center py-3 px-4 text-sm font-semibold cursor-default hover:bg-primary-500/30 transition-colors duration-200">
+                  <Badge
+                    variant="primary"
+                    className="w-full text-center justify-center py-3 px-4 text-sm font-semibold cursor-default hover:bg-primary-500/30 transition-colors duration-200"
+                  >
                     {skill.name}
                   </Badge>
                 </motion.div>
@@ -243,7 +262,10 @@ export default function About() {
             </p>
           </div>
         </div>
-        <a href="/contact" className="inline-flex text-primary-400 hover:text-primary-300 font-semibold transition-colors duration-200 group">
+        <a
+          href="/contact"
+          className="inline-flex text-primary-400 hover:text-primary-300 font-semibold transition-colors duration-200 group"
+        >
           Get in touch →
           <span className="group-hover:translate-x-1 transition-transform duration-200 ml-1">→</span>
         </a>
