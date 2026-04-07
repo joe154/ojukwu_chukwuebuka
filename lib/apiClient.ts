@@ -1,3 +1,4 @@
+"use client";
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { auth } from './firebase';
 
