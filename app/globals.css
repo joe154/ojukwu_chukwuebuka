@@ -54,7 +54,6 @@ body {
    ============================================================================ */
 
 @layer base {
-  /* Headings */
   h1 {
     @apply text-5xl sm:text-6xl font-extrabold tracking-tighter mb-lg;
     letter-spacing: -0.02em;
@@ -81,7 +80,6 @@ body {
     @apply text-lg font-semibold mb-xs;
   }
 
-  /* Paragraphs */
   p {
     @apply text-base leading-relaxed text-slate-300;
   }
@@ -91,7 +89,6 @@ body {
     text-underline-offset: 4px;
   }
 
-  /* Code & Pre */
   code {
     @apply bg-slate-800 px-2 py-1 rounded text-sm font-mono text-slate-100;
   }
@@ -165,7 +162,7 @@ body {
   }
 
   .card-interactive {
-    @apply card cursor-pointer hover:translateY-[-4px];
+    @apply card cursor-pointer hover:-translate-y-[4px];
   }
 
   /* INPUT & FORMS */
@@ -259,7 +256,6 @@ body {
    ============================================================================ */
 
 @layer utilities {
-  /* Visibility */
   .sr-only {
     position: absolute;
     width: 1px;
@@ -272,7 +268,6 @@ body {
     border-width: 0;
   }
 
-  /* Transforms */
   .transform-gpu {
     transform: translateZ(0);
   }
@@ -281,7 +276,6 @@ body {
     perspective: 1200px;
   }
 
-  /* Scrollbar Styling */
   .scrollbar-thin::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -300,7 +294,6 @@ body {
     background: #64748b;
   }
 
-  /* Backdrops */
   .backdrop-blur-sm {
     backdrop-filter: blur(4px);
   }
@@ -313,31 +306,12 @@ body {
     backdrop-filter: blur(24px);
   }
 
-  /* Glass Morphism */
   .glass {
     @apply bg-white/10 backdrop-blur-md border border-white/20;
   }
 
   .glass-dark {
     @apply bg-slate-900/50 backdrop-blur-md border border-slate-700/50;
-  }
-}
-
-/* ============================================================================
-   RESPONSIVE UTILITIES
-   ============================================================================ */
-
-@media (max-width: 640px) {
-  h1 {
-    @apply text-3xl;
-  }
-  
-  h2 {
-    @apply text-2xl;
-  }
-
-  h3 {
-    @apply text-xl;
   }
 }
 
@@ -365,6 +339,24 @@ body {
 }
 
 /* ============================================================================
+   RESPONSIVE UTILITIES
+   ============================================================================ */
+
+@media (max-width: 640px) {
+  h1 {
+    @apply text-3xl;
+  }
+  
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+}
+
+/* ============================================================================
    PRINT STYLES
    ============================================================================ */
 
@@ -376,59 +368,5 @@ body {
 
   .no-print {
     display: none;
-  }
-}
-  h3 {
-    @apply text-2xl font-bold mb-2;
-  }
-  
-  h4 {
-    @apply text-xl font-semibold mb-2;
-  }
-  
-  p {
-    @apply text-base text-gray-300 leading-relaxed;
-  }
-  
-  a {
-    @apply text-blue-400 hover:text-blue-300 transition-colors duration-200;
-  }
-/* Component Base Styles */
-@layer components {
-  /* Buttons */
-  .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-semibold transition-all duration-200 cursor-pointer;
-  }
-  
-  .btn-primary {
-    @apply btn bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl;
-  }
-  
-  .btn-secondary {
-    @apply btn bg-slate-800 text-gray-100 hover:bg-slate-700 border border-slate-600 hover:border-slate-500;
-  }
-  
-  /* Cards */
-  .card {
-    @apply bg-slate-800/50 rounded-xl p-6 border border-slate-700 transition-all duration-300 backdrop-blur-sm;
-  }
-  
-  .card:hover {
-    @apply border-slate-600 shadow-xl;
-  }
-  
-  /* Containers */
-  .container-wide {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  /* Section spacing */
-  .section {
-    @apply py-12 sm:py-16 lg:py-20;
-  }
-  
-  /* Divider */
-  .divider {
-    @apply border-t border-slate-700 my-6;
   }
 }
