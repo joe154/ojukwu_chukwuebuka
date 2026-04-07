@@ -2,6 +2,9 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { auth } from './firebase';
 
+// Keep original base for retry/fallback logic
+const ORIGINAL_BASE = process.env.NEXT_PUBLIC_API_URL || '/api';
+
 // Custom error interface
 export interface APIError {
   message: string;
@@ -13,7 +16,7 @@ export interface APIError {
 // Response interceptor handler
 const createApiInstance = (): AxiosInstance => {
   const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL || '/api',
+    baseURL: ORIGINAL_BASE,
     timeout: 30000,
     headers: {
       'Content-Type': 'application/json',
@@ -45,8 +48,24 @@ const createApiInstance = (): AxiosInstance => {
     async (error: AxiosError<any>) => {
       const config = error.config as InternalAxiosRequestConfig & { _retry?: number };
 
-      // Network error
+      // Network error (could be CORS or unreachable host)
       if (!error.response) {
+        // Try a safe host-correction fallback once for common misspellings
+        try {
+          const cfg = (error.config as any) || {};
+          const base = cfg.baseURL || ORIGINAL_BASE;
+          if (typeof base === 'string' && base.toLowerCase().includes('portfoio') && !cfg._retryHostFix) {
+            cfg._retryHostFix = true;
+            const fixedBase = base.replace(/portfoio/gi, 'portfolio');
+            console.warn('[apiClient] network error — retrying with corrected baseURL:', fixedBase);
+            const newConfig = { ...cfg, baseURL: fixedBase };
+            return api(newConfig);
+          }
+        } catch (e) {
+          // fall through to return network error
+          console.error('Host-fix attempt failed', e);
+        }
+
         const apiError: APIError = {
           message: 'Network error. Please check your connection.',
           code: 'NETWORK_ERROR',
