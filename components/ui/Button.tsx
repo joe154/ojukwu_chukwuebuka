@@ -1,7 +1,7 @@
 'use client';
 
 import React, { ButtonHTMLAttributes, ReactNode } from 'react';
-import { MotionButton } from '../lib/motion';
+import { MotionButton } from '../../lib/motion';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger';
