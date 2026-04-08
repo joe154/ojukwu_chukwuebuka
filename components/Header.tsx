@@ -38,18 +38,18 @@ export default function Header() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-300 pointer-events-auto ${
         scrolled
           ? "bg-slate-900/80 border-b border-slate-700/30 backdrop-blur-xl shadow-lg shadow-primary-500/5"
           : "bg-gradient-to-b from-slate-900/50 to-transparent border-b border-slate-700/20 backdrop-blur-md"
       }`}
     >
-      <nav className="container-max px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
+      <nav className="container-max px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between pointer-events-auto">
         {/* Logo */}
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }}>
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3 }} className="pointer-events-auto">
           <Link
             href="/"
-            className="flex items-center gap-2 font-extrabold text-2xl sm:text-3xl bg-gradient-to-r from-primary-400 via-primary-500 to-cyan-400 bg-clip-text text-transparent hover:from-primary-300 hover:to-cyan-300 transition-all duration-300"
+            className="flex items-center gap-2 font-extrabold text-2xl sm:text-3xl bg-gradient-to-r from-primary-400 via-primary-500 to-cyan-400 bg-clip-text text-transparent hover:from-primary-300 hover:to-cyan-300 transition-all duration-300 pointer-events-auto"
           >
             <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-cyan-500 rounded-xl flex items-center justify-center text-white font-bold">EB</div>
             <span className="hidden sm:inline">Ebuka</span>
@@ -57,9 +57,9 @@ export default function Header() {
         </motion.div>
 
         {/* Desktop Navigation */}
-        <motion.div className="hidden lg:flex items-center gap-1" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}>
+        <motion.div className="hidden lg:flex items-center gap-1 pointer-events-auto" initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }}>
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="relative px-4 py-2 text-slate-300 hover:text-slate-100 font-medium transition-colors duration-200 group">
+            <Link key={item.href} href={item.href} className="relative px-4 py-2 text-slate-300 hover:text-slate-100 font-medium transition-colors duration-200 group pointer-events-auto">
               {item.label}
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary-500 to-cyan-400 transform scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300" />
             </Link>
@@ -67,10 +67,10 @@ export default function Header() {
         </motion.div>
 
         {/* Auth Section */}
-        <motion.div className="flex items-center gap-2 sm:gap-3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.2 }}>
+        <motion.div className="flex items-center gap-2 sm:gap-3 pointer-events-auto" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.2 }}>
           {user ? (
             <>
-              <Link href="/admin" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 transition-all duration-200 font-medium">
+              <Link href="/admin" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 transition-all duration-200 font-medium pointer-events-auto">
                 <Settings className="w-4 h-4" />
                 <span className="hidden md:inline">Admin</span>
               </Link>
@@ -82,7 +82,7 @@ export default function Header() {
               </Button>
             </>
           ) : (
-            <Link href="/login">
+            <Link href="/login" className="pointer-events-auto">
               <Button variant="primary" size="sm">
                 <span className="hidden sm:inline">Login</span>
                 <span className="sm:hidden">Sign In</span>
@@ -91,7 +91,7 @@ export default function Header() {
           )}
 
           {/* Mobile Menu Button */}
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden ml-2 p-2 hover:bg-slate-700/50 rounded-lg transition-colors duration-200 text-slate-300 hover:text-slate-100" aria-label="Toggle mobile menu" aria-expanded={mobileMenuOpen}>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden ml-2 p-2 hover:bg-slate-700/50 rounded-lg transition-colors duration-200 text-slate-300 hover:text-slate-100 pointer-events-auto" aria-label="Toggle mobile menu" aria-expanded={mobileMenuOpen}>
             <AnimatePresence mode="wait">
               {mobileMenuOpen ? (
                 <motion.div key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
@@ -110,32 +110,32 @@ export default function Header() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div className="lg:hidden border-t border-slate-700/30 bg-slate-800/50 backdrop-blur-xl" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}>
-            <div className="container-max px-4 sm:px-6 py-4 flex flex-col gap-3">
+          <motion.div className="lg:hidden border-t border-slate-700/30 bg-slate-800/50 backdrop-blur-xl pointer-events-auto" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}>
+            <div className="container-max px-4 sm:px-6 py-4 flex flex-col gap-3 pointer-events-auto">
               {navItems.map((item, index) => (
-                <motion.div key={item.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: index * 0.05 }}>
-                  <Link href={item.href} className="block px-4 py-3 text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium" onClick={() => setMobileMenuOpen(false)}>
+                <motion.div key={item.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: index * 0.05 }} className="pointer-events-auto">
+                  <Link href={item.href} className="block px-4 py-3 text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium pointer-events-auto" onClick={() => setMobileMenuOpen(false)}>
                     {item.label}
                   </Link>
                 </motion.div>
               ))}
 
               {user && (
-                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: 0.2 }}>
-                  <Link href="/admin" className="block px-4 py-3 text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium flex items-center gap-2">
+                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: 0.2 }} className="pointer-events-auto">
+                  <Link href="/admin" className="block px-4 py-3 text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium flex items-center gap-2 pointer-events-auto">
                     <Settings className="w-4 h-4" />
                     Admin
                   </Link>
                 </motion.div>
               )}
 
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: 0.25 }}>
+              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: 0.25 }} className="pointer-events-auto">
                 {user ? (
                   <Button variant="secondary" fullWidth onClick={handleLogout} icon={<LogOut className="w-4 h-4" />}>
                     Logout
                   </Button>
                 ) : (
-                  <Link href="/login" className="block">
+                  <Link href="/login" className="block pointer-events-auto">
                     <Button variant="primary" fullWidth>
                       Sign In
                     </Button>
