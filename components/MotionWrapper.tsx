@@ -7,14 +7,14 @@ import { usePathname } from "next/navigation";
 export default function MotionWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="popLayout">
       <MotionDiv
         key={pathname}
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -8 }}
         transition={{ duration: 0.32 }}
-        className="w-full"
+        className="w-full pointer-events-auto"
       >
         {children}
       </MotionDiv>
