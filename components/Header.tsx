@@ -66,9 +66,9 @@ export default function Header() {
           ))}
         </motion.div>
 
-        {/* Auth Section */}
+        {/* Auth Section - Only show for logged-in users */}
         <motion.div className="flex items-center gap-2 sm:gap-3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.2 }}>
-          {user ? (
+          {user && (
             <>
               <Link href="/admin" className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 transition-all duration-200 font-medium">
                 <Settings className="w-4 h-4" />
@@ -81,13 +81,6 @@ export default function Header() {
                 <LogOut className="w-4 h-4" />
               </Button>
             </>
-          ) : (
-            <Link href="/login">
-              <Button variant="primary" size="sm">
-                <span className="hidden sm:inline">Login</span>
-                <span className="sm:hidden">Sign In</span>
-              </Button>
-            </Link>
           )}
 
           {/* Mobile Menu Button */}
@@ -121,27 +114,21 @@ export default function Header() {
               ))}
 
               {user && (
-                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: 0.2 }}>
-                  <Link href="/admin" className="block px-4 py-3 text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium flex items-center gap-2">
-                    <Settings className="w-4 h-4" />
-                    Admin
-                  </Link>
-                </motion.div>
-              )}
+                <>
+                  <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: 0.2 }}>
+                    <Link href="/admin" className="block px-4 py-3 text-slate-300 hover:text-slate-100 hover:bg-slate-700/50 rounded-lg transition-all duration-200 font-medium flex items-center gap-2">
+                      <Settings className="w-4 h-4" />
+                      Admin
+                    </Link>
+                  </motion.div>
 
-              <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: 0.25 }}>
-                {user ? (
-                  <Button variant="secondary" fullWidth onClick={handleLogout} icon={<LogOut className="w-4 h-4" />}>
-                    Logout
-                  </Button>
-                ) : (
-                  <Link href="/login" className="block">
-                    <Button variant="primary" fullWidth>
-                      Sign In
+                  <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2, delay: 0.25 }}>
+                    <Button variant="secondary" fullWidth onClick={handleLogout} icon={<LogOut className="w-4 h-4" />}>
+                      Logout
                     </Button>
-                  </Link>
-                )}
-              </motion.div>
+                  </motion.div>
+                </>
+              )}
             </div>
           </motion.div>
         )}
