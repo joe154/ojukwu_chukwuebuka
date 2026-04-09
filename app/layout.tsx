@@ -1,6 +1,6 @@
 import "./globals.css";
 import { ReactNode } from "react";
-import MainLayout from "@/components/Layout/MainLayout";
+import MainLayout from "../components/Layout/MainLayout";
 
 export const metadata = {
   title: "Ebuka - Full-Stack Developer & Designer",
