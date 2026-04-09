@@ -57,14 +57,22 @@ export default function AdminDashboard() {
         ]);
 
         setStats({
-          projects: projectsRes.data?.length || 0,
-          skills: skillsRes.data?.length || 0,
-          categories: categoriesRes.data?.length || 0,
-          messages: messagesRes.data?.length || 0,
-          admins: adminsRes.data?.admins?.length || 1,
+          projects: Array.isArray(projectsRes.data) ? projectsRes.data.length : 0,
+          skills: Array.isArray(skillsRes.data) ? skillsRes.data.length : 0,
+          categories: Array.isArray(categoriesRes.data) ? categoriesRes.data.length : 0,
+          messages: Array.isArray(messagesRes.data) ? messagesRes.data.length : 0,
+          admins: Array.isArray(adminsRes.data?.admins) ? adminsRes.data.admins.length : 0,
         });
       } catch (err) {
         console.error("Failed to fetch stats:", err);
+        // Set default empty stats on error
+        setStats({
+          projects: 0,
+          skills: 0,
+          categories: 0,
+          messages: 0,
+          admins: 0,
+        });
       } finally {
         setLoading(false);
       }

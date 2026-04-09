@@ -12,9 +12,44 @@ type Props = {
   project: any;
 };
 
+/**
+ * Process image URL to ensure it's properly formatted
+ * - Handle relative paths (/uploads/...)
+ * - Handle absolute URLs (http://...)
+ * - Fall back to placeholder if needed
+ */
+function getImageUrl(src?: string): string {
+  if (!src) return "/placeholder.jpg";
+  
+  // If it's already an absolute URL, return as-is
+  if (src.startsWith("http://") || src.startsWith("https://")) {
+    return src;
+  }
+  
+  // If it starts with /, assume it's relative to backend API
+  if (src.startsWith("/")) {
+    // Check if it's an uploads path
+    if (src.startsWith("/uploads/")) {
+      return src; // Relative path - browser will resolve it
+    }
+    return `/api${src}`; // Prepend /api if it's another endpoint
+  }
+  
+  // Otherwise, assume it's a relative path that should go to /uploads/
+  if (!src.startsWith("/uploads/")) {
+    return `/uploads/${src}`;
+  }
+  
+  return src;
+}
+
 export default function ProjectCard({ project }: Props) {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const src = project.cover_image || project.image || "/placeholder.jpg";
+  const [imageError, setImageError] = useState(false);
+  
+  // Try cover_image first, then image, then placeholder
+  const rawSrc = project.cover_image || project.image;
+  const src = imageError ? "/placeholder.jpg" : (rawSrc ? getImageUrl(rawSrc) : "/placeholder.jpg");
   const projectLink = `/projects/${project.slug || project.id}`;
 
   return (
@@ -28,7 +63,7 @@ export default function ProjectCard({ project }: Props) {
           {/* Image Container */}
           <div className="relative overflow-hidden h-56 bg-gradient-to-br from-slate-700 to-slate-800">
             {/* Loading skeleton */}
-            {!imageLoaded && (
+            {!imageLoaded && !imageError && (
               <div className="absolute inset-0 bg-gradient-to-r from-slate-700 via-slate-600 to-slate-700 animate-pulse" />
             )}
 
@@ -46,6 +81,9 @@ export default function ProjectCard({ project }: Props) {
                 height={224}
                 className="w-full h-full object-cover"
                 onLoadingComplete={() => setImageLoaded(true)}
+                onError={() => setImageError(true)}
+                priority={false}
+                unoptimized={process.env.NODE_ENV === 'development'}
               />
 
               {/* Overlay */}
