@@ -1,6 +1,5 @@
 import "./globals.css";
 import { ReactNode } from "react";
-import MainLayout from "../components/Layout/MainLayout";
 
 export const metadata = {
   title: "Ebuka - Full-Stack Developer & Designer",
@@ -22,11 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <meta name="theme-color" content="#020617" />
       </head>
       <body className="antialiased bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-        {/* 
-          MainLayout wraps non-admin routes with providers and UserLayout (Header+Footer).
-          Admin routes have their own layout.tsx which overrides this.
-        */}
-        <MainLayout>{children}</MainLayout>
+        {children}
       </body>
     </html>
   );
