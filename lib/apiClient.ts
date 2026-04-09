@@ -32,10 +32,13 @@ const createApiInstance = (): AxiosInstance => {
           const token = await user.getIdToken();
           if (config.headers) {
             config.headers.Authorization = `Bearer ${token}`;
+            console.log(`[API] Token attached for ${config.url}`, { user: user.email, tokenLength: token.length });
           }
+        } else {
+          console.log(`[API] No user logged in for ${config.url}`);
         }
       } catch (err) {
-        console.error('Error getting auth token:', err);
+        console.error('[API] Error getting auth token:', err);
       }
       return config;
     },
@@ -75,6 +78,11 @@ const createApiInstance = (): AxiosInstance => {
       }
 
       const { status, data } = error.response;
+
+      // Log all auth errors
+      if (status === 401 || status === 403) {
+        console.error(`[API] ${status} Error on ${error.config?.url}:`, data);
+      }
 
       // Unauthorized - Clear auth and redirect
       if (status === 401) {
